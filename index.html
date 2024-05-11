@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Checker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Plagiarism Checker</h1>
+        <form action="/" method="POST">
+            <textarea name="query" rows="4" cols="50" placeholder="Enter your text here..."></textarea>
+            <br>
+            <input type="submit" value="Check for Plagiarism">
+        </form>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if similar_documents %}
+        <h2>Similar Documents:</h2>
+        <ul>
+            {% for document, score in similar_documents %}
+            <li>{{ document }} (Similarity Score: {{ score }})</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
